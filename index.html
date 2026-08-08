@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sorry Shona 🥺 | Please Maaf Kore Dao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;900&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
+    :root {
+      --primary: #ff3366;
+      --primary-dark: #d81159;
+      --primary-light: #ff758f;
+      --bg-gradient: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 50%, #ffc3a0 100%);
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --text-dark: #4a0e2e;
+      --text-muted: #8b5d73;
+      --gold: #f59e0b;
+      --green: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      position: relative;
+      user-select: none;
+    }
+
+    /* Floating Mixed Sorry & Love Emoji Particles */
+    #particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: 24px;
+      user-select: none;
+      animation: floatUp 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+      opacity: 0;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.85;
+      }
+      80% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translateY(-15vh) scale(1.3) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    /* Music & Audio Floating Control */
+    .audio-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--primary-light);
+      color: var(--primary);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(255, 51, 102, 0.25);
+      transition: all 0.3s ease;
+    }
+    .audio-toggle:hover {
+      transform: scale(1.1);
+      background: #fff;
+    }
+
+    /* Main Container */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+    }
+
+    /* Card Box */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 15px 35px rgba(216, 17, 89, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      text-align: center;
+      display: none;
+      animation: cardPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      position: relative;
+    }
+
+    .card.active {
+      display: block;
+    }
+
+    @keyframes cardPopIn {
+      0% { opacity: 0; transform: scale(0.85) translateY(25px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Tag & Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffe3ec;
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255, 51, 102, 0.2);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 16px 26px;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(216, 17, 89, 0.35);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(216, 17, 89, 0.45);
+    }
+    .btn-primary:active {
+      transform: scale(0.96);
+    }
+
+    .btn-secondary {
+      background: #fdf2f4;
+      color: var(--primary);
+      border: 2px solid #ffd1dc;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+    .btn-secondary:hover {
+      background: #ffe3ec;
+    }
+
+    /* Animated Avatar / Bear */
+    .avatar-wrapper {
+      position: relative;
+      margin: 10px auto 18px;
+      width: 140px;
+      height: 140px;
+    }
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 10px 25px rgba(255, 51, 102, 0.25);
+      animation: gentleBounce 2.5s ease-in-out infinite;
+    }
+    .crying-emoji-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      font-size: 34px;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Recipient Card */
+    .couple-pill {
+      background: #fff;
+      padding: 10px 16px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 14px;
+      margin-bottom: 18px;
+      border: 1px dashed var(--primary-light);
+    }
+    .couple-pill b {
+      color: var(--primary-dark);
+    }
+
+    /* Grid of Gifts / Pacifiers */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .item-card {
+      background: white;
+      border: 2px solid #ffedf1;
+      padding: 14px 10px;
+      border-radius: 18px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.06);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .item-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-light);
+    }
+    .item-card:active {
+      transform: scale(0.93);
+    }
+    .item-card .icon {
+      font-size: 32px;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+    .item-card b {
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: var(--text-dark);
+    }
+    .item-card span.desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+    
+    .item-card.claimed {
+      border-color: var(--green);
+      background: #f0fdf4;
+      pointer-events: none;
+      animation: itemBounce 0.4s ease;
+    }
+    @keyframes itemBounce {
+      0% { transform: scale(0.85); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    .item-card.claimed .claimed-badge {
+      display: block;
+    }
+    .claimed-badge {
+      display: none;
+      position: absolute;
+      bottom: -8px;
+      background: var(--green);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Progress Bar Box */
+    .progress-box {
+      margin-top: 15px;
+      background: white;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #ffd6e0;
+      text-align: left;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--text-dark);
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 16px;
+      background: #ffe3ec;
+      border-radius: 10px;
+      margin: 8px 0 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff758f, #ff3366);
+      border-radius: 10px;
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .progress-msg {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 600;
+      min-height: 18px;
+    }
+
+    /* Sweet Benglish Letter Section */
+    .letter-envelope {
+      background: #fff9fa;
+      border: 2px dashed #ff8fa3;
+      border-radius: 20px;
+      padding: 22px 18px;
+      text-align: left;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.08);
+      position: relative;
+    }
+    .letter-envelope::before {
+      content: "💌";
+      position: absolute;
+      top: -14px;
+      right: 20px;
+      font-size: 26px;
+      background: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .letter-header {
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+    .letter-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #3b071e;
+      font-weight: 500;
+    }
+    .letter-footer {
+      margin-top: 15px;
+      text-align: right;
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: var(--primary);
+    }
+
+    /* Reasons Cards */
+    .reason-box {
+      background: white;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--primary);
+      text-align: left;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease;
+    }
+    .reason-box:hover {
+      transform: translateX(4px);
+    }
+    .reason-title {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .reason-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Runaway & Choice Buttons in Screen 5 */
+    .choice-container {
+      position: relative;
+      margin-top: 15px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    #btn-yes {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 14px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+      transition: all 0.25s ease;
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 10;
+      position: relative;
+    }
+    #btn-yes:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+    }
+
+    #btn-no {
+      background: #ffffff;
+      color: #e11d48;
+      border: 2px solid #fda4af;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+      width: 100%;
+      max-width: 260px;
+      user-select: none;
+      position: relative;
+      z-index: 100; /* ALWAYS on top of everything */
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.12);
+    }
+    #btn-no:active {
+      transform: scale(0.95);
+    }
+
+    /* Cute Speech Bubble for Tease Message */
+    .tease-bubble {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #e11d48;
+      background: #fff1f2;
+      border: 1.5px solid #fda4af;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-top: 10px;
+      animation: popShake 0.35s ease;
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.12);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tease-bubble.active {
+      display: inline-flex;
+    }
+    @keyframes popShake {
+      0% { transform: scale(0.8) translateY(-4px); opacity: 0; }
+      60% { transform: scale(1.05) translateY(0); opacity: 1; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* Messenger Share Button */
+    .btn-messenger {
+      background: linear-gradient(135deg, #00B2FF, #006AFF, #9933FF);
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 106, 255, 0.35);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+    .btn-messenger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 106, 255, 0.45);
+    }
+
+    /* Celebration Screen */
+    .celebration-box {
+      animation: popInCelebration 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes popInCelebration {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .celebration-icon {
+      font-size: 70px;
+      margin-bottom: 10px;
+      animation: heartBeat 1.2s infinite;
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.25); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.15); }
+    }
+
+    /* Interactive Click Sparks */
+    .tap-spark {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      z-index: 9999;
+      animation: sparkFly 0.8s ease-out forwards;
+    }
+    @keyframes sparkFly {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.4); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating particles container for Sorry + Love mix emojis -->
+  <div id="particles-container"></div>
+
+  <!-- Audio Toggle Button -->
+  <button class="audio-toggle" id="audio-btn" title="Play / Mute Music" onclick="toggleAudio()">
+    🎵
+  </button>
+  <audio id="bg-music" loop src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-lullaby-1581.mp3"></audio>
+
+  <div class="main-container">
+    
+    <!-- ==============================================
+         SCREEN 1: THE APOLOGY COVER
+         ============================================== -->
+    <div class="card active" id="screen-1">
+      <div class="badge">⚠️ Sincere Apology 🥺</div>
+      
+      <div class="avatar-wrapper">
+        <img src="apology_bear.png" alt="Sad Apology Bear" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=400&auto=format&fit=crop&q=80'">
+        <div class="crying-emoji-badge">🥺</div>
+      </div>
+
+      <h1>Maaf Kore Dao Na,<br>Misti? 🥺</h1>
+      
+      <div class="couple-pill">
+        <span>To: <b>Misti</b> 🌸</span>
+        <span>From: <b>Tomar Oi Buddhu Ta</b> 🙇‍♂️</span>
+      </div>
+
+      <p>
+        Ami jaani amar jonno tomar mon kharap hoyeche... ar tomar abhiman ta ekdom justified. Sotti bolchi ami mon theke khub sorry go. Ekbar amar kotha ta shonbe please? 👉👈
+      </p>
+
+      <button class="btn-primary" onclick="goToScreen('screen-1', 'screen-2')">
+        🩹 Band-aid e tap kore bhetore asho ↓
+      </button>
+    </div>
+
+    <!-- ==============================================
+         SCREEN 2: ANGER MELTER / MANANE KI STRATEGY GAME
+         ============================================== -->
+    <div class="card" id="screen-2">
+      <div class="badge">Step 1: Tomar Abhiman Bhangano 🧋</div>
+      <h2>Manane Ki Koshish ✨</h2>
+      <p style="font-size: 13.5px; margin-bottom: 12px;">
+        Tomar pochhonder treats gulo claim kore <b>"Maan Gecho Meter"</b> full koro na! 🥺
+      </p>
+      
+      <div class="grid">
+        <div class="item-card" onclick="claimOffering(this, 25, 'Ek cup sweet tea / boba! 🧋')">
+          <span class="icon">🧋</span>
+          <b>Boba & Cold Coffee</b>
+          <span class="desc">Tomar gussa instant thanda korar treat!</span>
+          <span class="claimed-badge">✨ ACCEPTED</span>
+        </div>
+
+        <div class="item-card" onclick="claimOffering(this, 25, 'Chocolate & Ice Cream! 🍫')">
+          <span class="icon">🍫</span>
+          <b>Sweet Chocolate</b>
+          <span class="desc">Karon misti jinish sudhu tomar jonno perfect.</span>
+          <span class="claimed-badge">✨ ACCEPTED</span>
+        </div>
+
+        <div class="item-card" onclick="claimOffering(this, 25, 'Super Warm Hug! 🧸')">
+          <span class="icon">🧸</span>
+          <b>Warm Tight Hug</b>
+          <span class="desc">Saara abhiman ar koshto muche dite.</span>
+          <span class="claimed-badge">✨ ACCEPTED</span>
+        </div>
+
+        <div class="item-card" onclick="claimOffering(this, 25, 'Fresh Flowers! 🌸')">
+          <span class="icon">🌸</span>
+          <b>Fresh Flowers</b>
+          <span class="desc">Sudhu tomar oi cute smile ta dekhar jonno.</span>
+          <span class="claimed-badge">✨ ACCEPTED</span>
+        </div>
+      </div>
+
+      <!-- Progress Meter -->
+      <div class="progress-box">
+        <div class="progress-header">
+          <span>Maan Gecho Meter:</span>
+          <span id="meter-percent" style="color: var(--primary); font-size: 14px;">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="meter-fill"></div>
+        </div>
+        <div class="progress-msg" id="meter-status">Sob treats e tap kore claim koro na please...</div>
+      </div>
+
+      <button id="btn-next-to-letter" class="btn-primary" style="display: none; margin-top: 15px;" onclick="goToScreen('screen-2', 'screen-3')">
+        Mera Sorry Letter Padho 💌
+      </button>
+    </div>
+
+    <!-- ==============================================
+         SCREEN 3: SWEET & SUBTLE CLOSE BENGLISH LETTER
+         ============================================== -->
+    <div class="card" id="screen-3">
+      <div class="badge">Step 2: Moner Kotha 💌</div>
+      <h2>Mera Sorry Letter 🥺</h2>
+      
+      <div class="letter-envelope">
+        <div class="letter-header">Misti,</div>
+        <div class="letter-body">
+          Ami jaani amar bhul hoyechilo ar amar upor tomar onek abhiman hoyeche. Sotti bolchi, ami mon theke khub <b>sorry</b> re... 🥺
+          <br><br>
+          Tumi jokhon chup thako ba kotha bolo na, amar pura din ta thik laage na. Hoyto shob kotha mukhe bolte pari na... kintu tumi amar kache koto ta special ar tomar ekta smile amar jonno koto ta matter kore, seta bujhi.
+          <br><br>
+          Promise korchi porer bar theke onek onek kheyal rakhbo ar tomake kokhono erom upset korbo na. Ebar please oi misti hashi ta diye raag ta kome dao na?
+        </div>
+        <div class="letter-footer">
+          <i>You mean so much to me, always... ✨</i><br>
+          <span style="font-size: 16px; font-family: 'Nunito', sans-serif; color: var(--text-muted);">— Tomar Prio Bondhu 🤍</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goToScreen('screen-3', 'screen-4')">
+        Ar Ektu Sunbe? (Reasons...) ✨
+      </button>
+    </div>
+
+    <!-- ==============================================
+         SCREEN 4: 3 REASONS TO FORGIVE (HIDDEN CLOSENESS)
+         ============================================== -->
+    <div class="card" id="screen-4">
+      <div class="badge">Step 3: Maaf Korar 3-ti Karon 📜</div>
+      <h2>Keno Tomake Maaf Korte Hobe? ✨</h2>
+      <p style="font-size: 13.5px; margin-bottom: 15px;">Ei reasons gulo pore dekho... aar raag kore thakte parbe na:</p>
+
+      <div class="reason-box">
+        <div class="reason-title"><span>🥺</span> 1. Tumi Chup Thakle Amar Kichu Bhalo Lage Na</div>
+        <div class="reason-desc">Tomar sathe kotha na bolle amar puro din ta faka faka lage, karon tumi amar kache shobcheye special.</div>
+      </div>
+
+      <div class="reason-box">
+        <div class="reason-title"><span>🤍</span> 2. Ami 100% Shotti Manchi</div>
+        <div class="reason-desc">Ami amar bhul shikar korchi ar lifelong tomar sob chotto chotto jinishe onek beshi kheyal rakhbo promise!</div>
+      </div>
+
+      <div class="reason-box">
+        <div class="reason-title"><span>✨</span> 3. Amader Connection Shobcheye Unique</div>
+        <div class="reason-desc">Amader bondhutwa ar bondhutto thekeo beshi ekta alada connection ache... seta amar kache khub precious. Tai please raag ta bhule jao!</div>
+      </div>
+
+      <button class="btn-primary" onclick="goToScreen('screen-4', 'screen-5')">
+        Final Question e Cholo 👉👈
+      </button>
+    </div>
+
+    <!-- ==============================================
+         SCREEN 5: THE ULTIMATE ACCEPTANCE (RUNAWAY BUTTON)
+         ============================================== -->
+    <div class="card" id="screen-5">
+      <div class="badge">Final Step: Faisla ⚖️🥺</div>
+      <h2>Will You Forgive Me? 🥺</h2>
+      <p style="font-size: 14px;">
+        Misti, ebar ki amake maaf kore abar ager moto amader oi special kotha bola start korbe? 👉👈
+      </p>
+
+      <div style="font-size: 75px; margin: 10px 0; animation: pulse 1.2s infinite;">🧸</div>
+
+      <!-- Prominent Tease Message Speech Bubble (Shown on No click/hover) -->
+      <div id="no-tease-msg" class="tease-bubble"></div>
+
+      <div class="choice-container" id="choice-area">
+        <button id="btn-yes" onclick="acceptApology()">
+          <span>✨ HAA, MAAF KORE DILAM! 😊</span>
+        </button>
+
+        <button id="btn-no" onmouseover="runAwayNoBtn()" onclick="runAwayNoBtn()" ontouchstart="runAwayNoBtn()">
+          Na, Aar Kotha Bolbo Na 😤
+        </button>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         SCREEN 6: CELEBRATION & SUCCESS (SUBTLE CLOSE)
+         ============================================== -->
+    <div class="card celebration-box" id="screen-6">
+      <div class="celebration-icon">🎉🤍</div>
+      <div class="badge" style="background: #dcfce7; color: #15803d; border-color: #86efac;">
+        Abhiman Sesh! 🤍✨
+      </div>
+      
+      <h1 style="color: #059669; font-size: 28px;">YAYYY! Tumi Maaf Kore Dile! 🥳</h1>
+      
+      <div class="letter-envelope" style="background: #f0fdf4; border-color: #86efac; margin: 18px 0;">
+        <p style="font-size: 15px; color: #166534; font-weight: 600; margin: 0; line-height: 1.7;">
+          Thank you so much Misti! 😊<br>
+          Tumi sotti amar kache onek precious. Promise korchi aar kokhono erom bhul korbo na ar tomake upset korbo na!
+          <br><br>
+          <b style="color: #d81159; font-size: 16px;">Always here for you, no matter what! ✨🌸🤍</b>
+        </p>
+      </div>
+
+      <button class="btn-messenger" onclick="shareOnMessenger()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle;">
+          <path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.912 1.455 5.518 3.735 7.208V22l3.383-1.857c.928.257 1.91.396 2.882.396 5.523 0 10-4.145 10-9.281C22 6.145 17.523 2 12 2zm1.066 12.443l-2.73-2.909-5.328 2.909 5.86-6.222 2.798 2.909 5.26-2.909-5.86 6.222z"/>
+        </svg>
+        <span>Send Message on FB Messenger 💬</span>
+      </button>
+
+      <button class="btn-secondary" onclick="restartExperience()">
+        Abar Shuru Theke Dekho 🔄
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    /* ==========================================================
+       1. MIXED SORRY & SUBTLE ROMANTIC FLOATING PARTICLES
+       ========================================================== */
+    const emojiPool = [
+      '🥺', '🌸', '✨', '🩹', '🤍', '🍫', '🧸', '💐',
+      '☕', '🧁', '🍓', '💌', '🙇‍♂️', '🥺', '✨', '🌸', '🤍'
+    ];
+
+    const particlesContainer = document.getElementById('particles-container');
+
+    function createParticle() {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      
+      // Pick random emoji
+      p.innerText = emojiPool[Math.floor(Math.random() * emojiPool.length)];
+      
+      // Randomize position, size & duration
+      const left = Math.random() * 96; // 0vw to 96vw
+      const size = Math.floor(Math.random() * 18) + 16; // 16px to 34px
+      const duration = (Math.random() * 3 + 4.5).toFixed(1); // 4.5s to 7.5s
+      const delay = (Math.random() * 1).toFixed(1);
+
+      p.style.left = left + 'vw';
+      p.style.fontSize = size + 'px';
+      p.style.animationDuration = duration + 's';
+      p.style.animationDelay = delay + 's';
+
+      particlesContainer.appendChild(p);
+
+      // Clean up DOM after animation completes
+      setTimeout(() => {
+        p.remove();
+      }, (parseFloat(duration) + parseFloat(delay)) * 1000 + 200);
+    }
+
+    // Continuously generate particles
+    setInterval(createParticle, 300);
+
+    /* ==========================================================
+       2. INTERACTIVE TAP / CLICK BURST SPARKS
+       ========================================================== */
+    document.addEventListener('pointerdown', function(e) {
+      if (e.target.closest('button') || e.target.closest('.item-card')) {
+        createSparkleBurst(e.clientX, e.clientY);
+      }
+    });
+
+    function createSparkleBurst(x, y) {
+      const burstEmojis = ['🥺', '✨', '🌸', '🩹', '🤍', '⭐'];
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'tap-spark';
+        spark.innerText = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+        spark.style.left = x + 'px';
+        spark.style.top = y + 'px';
+        
+        const angle = (Math.PI * 2 / 6) * i + (Math.random() * 0.5);
+        const distance = Math.random() * 60 + 40;
+        spark.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+        spark.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+        
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 800);
+      }
+    }
+
+    /* ==========================================================
+       3. AUDIO SYSTEM & SYNTHESIZER SOUND EFFECTS
+       ========================================================== */
+    const audio = document.getElementById('bg-music');
+    const audioBtn = document.getElementById('audio-btn');
+    let isMusicPlaying = false;
+
+    // Web Audio synthesizer for cute chime sounds
+    let audioCtx = null;
+    function playChime(freq = 520, type = 'sine') {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + 0.15);
+        
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch (e) {
+        // audio context fallback
+      }
+    }
+
+    function toggleAudio() {
+      if (isMusicPlaying) {
+        audio.pause();
+        audioBtn.innerText = '🔇';
+        isMusicPlaying = false;
+      } else {
+        audio.play().then(() => {
+          audioBtn.innerText = '🎵';
+          isMusicPlaying = true;
+        }).catch(() => {});
+      }
+    }
+
+    function startMusicOnFirstTouch() {
+      if (!isMusicPlaying) {
+        audio.play().then(() => {
+          audioBtn.innerText = '🎵';
+          isMusicPlaying = true;
+        }).catch(() => {});
+      }
+    }
+
+    /* ==========================================================
+       4. SCREEN NAVIGATION
+       ========================================================== */
+    function goToScreen(fromId, toId) {
+      startMusicOnFirstTouch();
+      playChime(600);
+      
+      const fromCard = document.getElementById(fromId);
+      const toCard = document.getElementById(toId);
+      
+      if (fromCard) fromCard.classList.remove('active');
+      if (toCard) toCard.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ==========================================================
+       5. GAME: OFFERINGS & MAAN GECHO METER
+       ========================================================== */
+    let currentScore = 0;
+    const meterFill = document.getElementById('meter-fill');
+    const meterPercent = document.getElementById('meter-percent');
+    const meterStatus = document.getElementById('meter-status');
+    const nextBtnLetter = document.getElementById('btn-next-to-letter');
+
+    function claimOffering(element, points, title) {
+      startMusicOnFirstTouch();
+      if (element.classList.contains('claimed')) return;
+
+      element.classList.add('claimed');
+      currentScore += points;
+      if (currentScore > 100) currentScore = 100;
+
+      playChime(400 + currentScore * 4);
+
+      meterFill.style.width = currentScore + '%';
+      meterPercent.innerText = currentScore + '%';
+
+      // Status messages progression
+      if (currentScore === 25) {
+        meterStatus.innerHTML = "<span style='color: #ff3366'>Ektu toh mon bhalo holo? Baki gulo o dekho na... 🥺</span>";
+      } else if (currentScore === 50) {
+        meterStatus.innerHTML = "<span style='color: #ff3366'>Dekho abhiman kome asche gradually! ✨</span>";
+      } else if (currentScore === 75) {
+        meterStatus.innerHTML = "<span style='color: #ff3366'>Ar matro ekta baki misti... pleaseee 🌸</span>";
+      } else if (currentScore >= 100) {
+        meterStatus.innerHTML = "<b style='color: #10b981'>Meter 100%! Ebar chotto letter ta poro mon diye... 🤍</b>";
+        nextBtnLetter.style.display = 'flex';
+        
+        // Trigger mini confetti
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.7 }
+          });
+        }
+      }
+    }
+
+    /* ==========================================================
+       6. RUNAWAY NO BUTTON & YES CELEBRATION
+       ========================================================== */
+    let runawayCount = 0;
+    const teaseMessages = [
+      "Arey oita click kora jabe na! 😜",
+      "Eto abhiman korle cholbe bolo? 🥺",
+      "Please na misti, dekho Green button ta koto sundor! 👉👈",
+      "Tomar oi chup thaka ta shojjo hoy na! 🤍",
+      "Dhoro amake jodi paro! 🏃‍♂️💨",
+      "Ebar toh ektu hasho na please! ✨",
+      "Maaf na kore kothao jete parbe na! 🥰"
+    ];
+
+    function runAwayNoBtn() {
+      const btnNo = document.getElementById('btn-no');
+      const btnYes = document.getElementById('btn-yes');
+      const teaseBubble = document.getElementById('no-tease-msg');
+      
+      playChime(300, 'sawtooth');
+      runawayCount++;
+
+      // Pick a random tease message & show prominent bubble
+      const msg = teaseMessages[Math.floor(Math.random() * teaseMessages.length)];
+      teaseBubble.innerHTML = `<span>🥺 ${msg}</span>`;
+      teaseBubble.classList.remove('active');
+      void teaseBubble.offsetWidth; // force DOM reflow for pop animation
+      teaseBubble.classList.add('active');
+
+      // Random position offsets within container without hiding behind Yes
+      const randomX = (Math.random() - 0.5) * 180;
+      const randomY = Math.min(60, (runawayCount * 12) + (Math.random() * 20));
+
+      btnNo.style.position = 'relative';
+      btnNo.style.zIndex = '100'; // always in front
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px) scale(${Math.max(0.85, 1 - runawayCount * 0.03)})`;
+
+      // Yes button subtle attractive scale & glow
+      const currentScale = 1 + Math.min(0.08, runawayCount * 0.02);
+      btnYes.style.transform = `scale(${currentScale})`;
+      btnYes.style.boxShadow = `0 8px 25px rgba(16, 185, 129, ${0.4 + Math.min(0.3, runawayCount * 0.05)})`;
+    }
+
+    function acceptApology() {
+      startMusicOnFirstTouch();
+      playChime(800, 'triangle');
+      goToScreen('screen-5', 'screen-6');
+
+      // Grand Confetti Storm
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = { origin: { y: 0.7 } };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+      }
+    }
+
+    function shareOnMessenger() {
+      const messageText = "Ami tomake maaf kore dilam! 😊 Abar ager moto special kotha bolbo ✨";
+      
+      // Copy sweet message to clipboard
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(messageText).catch(() => {});
+      }
+
+      // Open Facebook Messenger
+      window.open('https://www.messenger.com/', '_blank');
+    }
+
+    function restartExperience() {
+      currentScore = 0;
+      meterFill.style.width = '0%';
+      meterPercent.innerText = '0%';
+      meterStatus.innerText = 'Sob treats e tap kore claim koro na please...';
+      nextBtnLetter.style.display = 'none';
+
+      document.querySelectorAll('.item-card').forEach(card => card.classList.remove('claimed'));
+      
+      runawayCount = 0;
+      const btnNo = document.getElementById('btn-no');
+      btnNo.style.transform = 'none';
+      btnNo.style.position = 'relative';
+      btnNo.style.zIndex = '100';
+      document.getElementById('btn-yes').style.transform = 'none';
+      
+      const teaseBubble = document.getElementById('no-tease-msg');
+      teaseBubble.innerHTML = '';
+      teaseBubble.classList.remove('active');
+
+      goToScreen('screen-6', 'screen-1');
+    }
+  </script>
+</body>
+</html>
